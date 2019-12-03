@@ -43,5 +43,10 @@ public class AdminController {
         return ResponseEntity.ok(productService.save(product));
     }
 
+    @GetMapping("product/getAllProduct")
+    public ResponseEntity getAllProduct(){
+        return ResponseEntity.ok(productService.getALL());
+    }
+
     //endregion
 }

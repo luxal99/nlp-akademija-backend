@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService
 
     @Override
     public List<Product> getALL() {
-        return null;
+
+        return productRepository.findAll();
     }
 }
