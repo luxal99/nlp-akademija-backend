@@ -24,19 +24,19 @@ import javax.persistence.Table;
  * @author ThinkPad T470s
  */
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_PRODUCT")
+    @Column(name = "id_product")
     private Integer idProduct;
     @Basic(optional = false)
-    @Column(name = "TITLE")
+    @Column(name = "title")
     private String title;
     @Basic(optional = false)
-    @Column(name = "PRICE")
+    @Column(name = "price")
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct")
     private Collection<OnlinePurchase> onlinePurchaseCollection;

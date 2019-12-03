@@ -3,9 +3,10 @@ package com.example.demo.service;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ProductServiceImpl implements ProductService
 {
     @Autowired
@@ -13,7 +14,8 @@ public class ProductServiceImpl implements ProductService
 
     @Override
     public String save(Product product) {
-        return null;
+        productRepository.save(product);
+        return "Uspesno sacuvan seminar";
     }
 
     @Override
