@@ -32,7 +32,7 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID_EVENT")
-    private Integer idEvent;
+    private Long idEvent;
     @Basic(optional = false)
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
@@ -47,20 +47,20 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    public Event(Integer idEvent) {
+    public Event(Long idEvent) {
         this.idEvent = idEvent;
     }
 
-    public Event(Integer idEvent, Date date) {
+    public Event(Long idEvent, Date date) {
         this.idEvent = idEvent;
         this.date = date;
     }
 
-    public Integer getIdEvent() {
+    public Long getIdEvent() {
         return idEvent;
     }
 
-    public void setIdEvent(Integer idEvent) {
+    public void setIdEvent(Long idEvent) {
         this.idEvent = idEvent;
     }
 

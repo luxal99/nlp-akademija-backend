@@ -30,6 +30,10 @@ public class AdminController {
         return ResponseEntity.ok(eventService.save(event));
     }
 
+    @DeleteMapping("event/deleteEvent/{id}")
+    public ResponseEntity deleteEvent(@PathVariable Long id){
+        return ResponseEntity.ok(eventService.delete(id));
+    }
 
     //endregion
 
@@ -46,6 +50,11 @@ public class AdminController {
     @GetMapping("product/getAllProduct")
     public ResponseEntity getAllProduct(){
         return ResponseEntity.ok(productService.getALL());
+    }
+
+    @DeleteMapping("product/deleteProduct/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id){
+        return ResponseEntity.ok(productService.delete(id));
     }
 
     //endregion

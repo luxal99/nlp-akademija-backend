@@ -19,7 +19,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public String delete(Long id) {
-        return null;
+        eventRepository.deleteById(id);
+        return "Uspesno obrisan";
     }
 
     @Override

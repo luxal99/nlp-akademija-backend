@@ -20,7 +20,8 @@ public class ProductServiceImpl implements ProductService
 
     @Override
     public String delete(Long id) {
-        return null;
+        productRepository.deleteById(id);
+        return "Uspesno izbrisan seminar";
     }
 
     @Override

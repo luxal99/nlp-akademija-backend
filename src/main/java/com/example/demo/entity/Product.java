@@ -6,9 +6,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,40 +23,39 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product")
+
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_product")
-    private Integer idProduct;
+    private Long idProduct;
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
     @Column(name = "price")
     private long price;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct")
-    private Collection<OnlinePurchase> onlinePurchaseCollection;
 
     public Product() {
     }
 
-    public Product(Integer idProduct) {
+    public Product(Long idProduct) {
         this.idProduct = idProduct;
     }
 
-    public Product(Integer idProduct, String title, long price) {
+    public Product(Long idProduct, String title, long price) {
         this.idProduct = idProduct;
         this.title = title;
         this.price = price;
     }
 
-    public Integer getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(Integer idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 
@@ -76,14 +73,6 @@ public class Product implements Serializable {
 
     public void setPrice(long price) {
         this.price = price;
-    }
-
-    public Collection<OnlinePurchase> getOnlinePurchaseCollection() {
-        return onlinePurchaseCollection;
-    }
-
-    public void setOnlinePurchaseCollection(Collection<OnlinePurchase> onlinePurchaseCollection) {
-        this.onlinePurchaseCollection = onlinePurchaseCollection;
     }
 
     @Override
@@ -108,7 +97,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication2.Product[ idProduct=" + idProduct + " ]";
+        return "javaapplication2.Product_1[ idProduct=" + idProduct + " ]";
     }
     
 }
