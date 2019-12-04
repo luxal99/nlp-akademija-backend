@@ -26,7 +26,8 @@ public class ProductServiceImpl implements ProductService
 
     @Override
     public String update(Product product) {
-        return null;
+        productRepository.save(product);
+        return "Uspesno izmenjen";
     }
 
     @Override

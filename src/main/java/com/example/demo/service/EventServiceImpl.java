@@ -25,7 +25,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public String update(Event event) {
-        return null;
+        eventRepository.save(event);
+        return "Uspesno izmenjen";
     }
 
     @Override

@@ -21,19 +21,26 @@ public class AdminController {
     private EventService eventService;
 
     @GetMapping("event/getAllEvents")
-    public ResponseEntity<List<Event>> getAllEvents(){
+    public ResponseEntity<List<Event>> getAllEvents() {
         return ResponseEntity.ok(eventService.getAll());
     }
 
     @PostMapping("event/saveEvent")
-    public ResponseEntity saveEvent(@RequestBody Event event){
+    public ResponseEntity saveEvent(@RequestBody Event event) {
         return ResponseEntity.ok(eventService.save(event));
     }
 
     @DeleteMapping("event/deleteEvent/{id}")
-    public ResponseEntity deleteEvent(@PathVariable Long id){
+    public ResponseEntity deleteEvent(@PathVariable Long id) {
         return ResponseEntity.ok(eventService.delete(id));
     }
+
+    @PutMapping("event/updateEvent")
+    public ResponseEntity updateEvent(@RequestBody Event event) {
+        return ResponseEntity.ok(eventService.update(event));
+
+    }
+
 
     //endregion
 
@@ -43,18 +50,23 @@ public class AdminController {
     private ProductService productService;
 
     @PostMapping("product/saveProduct")
-    public ResponseEntity saveProduct(@RequestBody Product product){
+    public ResponseEntity saveProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
     @GetMapping("product/getAllProduct")
-    public ResponseEntity getAllProduct(){
+    public ResponseEntity getAllProduct() {
         return ResponseEntity.ok(productService.getALL());
     }
 
     @DeleteMapping("product/deleteProduct/{id}")
-    public ResponseEntity deleteProduct(@PathVariable Long id){
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.delete(id));
+    }
+
+    @PutMapping("product/updateProduct")
+    public ResponseEntity updateProduct(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.update(product));
     }
 
     //endregion

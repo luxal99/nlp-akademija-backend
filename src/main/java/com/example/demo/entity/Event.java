@@ -5,6 +5,8 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -36,6 +38,7 @@ public class Event implements Serializable {
     @Basic(optional = false)
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd-MM")
     private Date date;
     @Column(name = "TIME")
     private String time;
