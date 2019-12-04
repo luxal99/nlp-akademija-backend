@@ -13,16 +13,18 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public String save(Session session) {
-        return null;
+        sessionRepository.save(session);
+        return "Uspesno ste se prijavili";
     }
 
     @Override
     public String delte(Long id) {
-        return null;
+        sessionRepository.deleteById(id);
+        return "Uspesno obrisana sesija";
     }
 
     @Override
     public List<Session> getAll() {
-        return null;
+        return sessionRepository.findAll();
     }
 }
