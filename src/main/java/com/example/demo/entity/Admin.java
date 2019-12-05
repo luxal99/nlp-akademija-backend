@@ -22,16 +22,16 @@ import javax.persistence.Table;
  */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Table(name = "ADMIN")
+@Table(name = "admin")
 
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "USERNAME")
+    @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
     public Admin() {
