@@ -80,7 +80,7 @@ public class AdminController {
     private ClientService clientService;
 
     @PostMapping("client/saveClient")
-    public ResponseEntity saveClient(@RequestBody Client client){
+    public ResponseEntity saveClient(@RequestBody Client client) {
         return ResponseEntity.ok(clientService.save(client));
     }
     //endregion
@@ -91,8 +91,13 @@ public class AdminController {
     private OnlineCheckInService onlineCheckInService;
 
     @PostMapping("checkin/saveCheckIn")
-    public ResponseEntity saveCheckIn(@RequestBody OnlineCheckIn onlineCheckIn){
+    public ResponseEntity saveCheckIn(@RequestBody OnlineCheckIn onlineCheckIn) {
         return ResponseEntity.ok(onlineCheckInService.save(onlineCheckIn));
+    }
+
+    @GetMapping("checkin/getAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(onlineCheckInService.getAll());
     }
 
     //endregion

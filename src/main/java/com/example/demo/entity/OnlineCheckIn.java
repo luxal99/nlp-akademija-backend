@@ -5,6 +5,7 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -36,8 +37,6 @@ public class OnlineCheckIn implements Serializable {
     private String time;
     @Column(name = "comment")
     private String comment;
-    @OneToMany(mappedBy = "idCheckIn")
-    private List<Course> courseCollection;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Client idClient;
@@ -87,13 +86,6 @@ public class OnlineCheckIn implements Serializable {
         this.time = time;
     }
 
-    public List<Course> getCourseCollection() {
-        return courseCollection;
-    }
-
-    public void setCourseCollection(List<Course> courseCollection) {
-        this.courseCollection = courseCollection;
-    }
 
     public Client getIdClient() {
         return idClient;
