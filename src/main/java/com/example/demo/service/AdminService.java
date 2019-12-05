@@ -5,4 +5,5 @@ import com.example.demo.entity.Admin;
 public interface AdminService {
     public boolean isValidDate(Admin admin);
     public String changePassword(String password);
+    public  boolean isValid(String username,String password);
 }

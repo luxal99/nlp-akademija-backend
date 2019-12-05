@@ -5,10 +5,7 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.Event;
 import com.example.demo.entity.OnlineCheckIn;
 import com.example.demo.entity.Product;
-import com.example.demo.service.ClientService;
-import com.example.demo.service.EventService;
-import com.example.demo.service.OnlineCheckInService;
-import com.example.demo.service.ProductService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -98,6 +95,17 @@ public class AdminController {
     @GetMapping("checkin/getAll")
     public ResponseEntity getAll() {
         return ResponseEntity.ok(onlineCheckInService.getAll());
+    }
+
+    //endregion
+
+   //region --Login--
+@Autowired
+    private AdminService adminService;
+
+    @GetMapping("/isLoginValid/{username}/{password}")
+    public ResponseEntity isValid(@PathVariable String username,@PathVariable String password){
+        return ResponseEntity.ok(adminService.isValid(username,password));
     }
 
     //endregion
