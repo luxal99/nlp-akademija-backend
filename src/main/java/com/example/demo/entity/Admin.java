@@ -23,8 +23,8 @@ public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id_login")
+    private Long idLogin;
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
