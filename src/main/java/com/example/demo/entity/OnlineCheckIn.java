@@ -5,67 +5,69 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+import javax.persistence.*;
 
 /**
- *
  * @author ThinkPad T470s
  */
 @Entity
-@Table(name = "ONLINE_CHECK_IN")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "online_check_in")
 public class OnlineCheckIn implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_CHECK_IN")
-    private Integer idCheckIn;
+    @Column(name = "id_check_in", nullable = false)
+    private Long idCheckIn;
     @Basic(optional = false)
-    @Column(name = "DATE")
+    @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Column(name = "TIME")
-    @Temporal(TemporalType.TIME)
-    private Date time;
+    @Column(name = "time", nullable = false)
+    private String time;
+    @Column(name = "comment")
+    private String comment;
     @OneToMany(mappedBy = "idCheckIn")
-    private Collection<Course> courseCollection;
-    @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID_CLIENT")
-    @ManyToOne(optional = false)
+    private List<Course> courseCollection;
+    @JoinColumn(name = "id_client", referencedColumnName = "id_client")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Client idClient;
 
     public OnlineCheckIn() {
     }
 
-    public OnlineCheckIn(Integer idCheckIn) {
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+
+    public OnlineCheckIn(Long idCheckIn) {
         this.idCheckIn = idCheckIn;
     }
 
-    public OnlineCheckIn(Integer idCheckIn, Date date) {
+    public OnlineCheckIn(Long idCheckIn, Date date) {
         this.idCheckIn = idCheckIn;
         this.date = date;
     }
 
-    public Integer getIdCheckIn() {
+    public Long getIdCheckIn() {
         return idCheckIn;
     }
 
-    public void setIdCheckIn(Integer idCheckIn) {
+    public void setIdCheckIn(Long idCheckIn) {
         this.idCheckIn = idCheckIn;
     }
 
@@ -77,19 +79,19 @@ public class OnlineCheckIn implements Serializable {
         this.date = date;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public Collection<Course> getCourseCollection() {
+    public List<Course> getCourseCollection() {
         return courseCollection;
     }
 
-    public void setCourseCollection(Collection<Course> courseCollection) {
+    public void setCourseCollection(List<Course> courseCollection) {
         this.courseCollection = courseCollection;
     }
 
@@ -125,5 +127,5 @@ public class OnlineCheckIn implements Serializable {
     public String toString() {
         return "javaapplication2.OnlineCheckIn[ idCheckIn=" + idCheckIn + " ]";
     }
-    
+
 }

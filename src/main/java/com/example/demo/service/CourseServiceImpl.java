@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Client;
 import com.example.demo.entity.Course;
 import com.example.demo.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

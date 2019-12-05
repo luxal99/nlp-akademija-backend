@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.Client;
 import com.example.demo.entity.Event;
+import com.example.demo.entity.OnlineCheckIn;
 import com.example.demo.entity.Product;
+import com.example.demo.service.ClientService;
 import com.example.demo.service.EventService;
+import com.example.demo.service.OnlineCheckInService;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -70,4 +74,28 @@ public class AdminController {
     }
 
     //endregion
+
+    //region -- Client --
+    @Autowired
+    private ClientService clientService;
+
+    @PostMapping("client/saveClient")
+    public ResponseEntity saveClient(@RequestBody Client client){
+        return ResponseEntity.ok(clientService.save(client));
+    }
+    //endregion
+
+    //region --OnlineCheckIn --
+
+    @Autowired
+    private OnlineCheckInService onlineCheckInService;
+
+    @PostMapping("checkin/saveCheckIn")
+    public ResponseEntity saveCheckIn(@RequestBody OnlineCheckIn onlineCheckIn){
+        return ResponseEntity.ok(onlineCheckInService.save(onlineCheckIn));
+    }
+
+    //endregion
+
+
 }

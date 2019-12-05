@@ -5,6 +5,8 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
  * @author ThinkPad T470s
  */
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "ADMIN")
 
 public class Admin implements Serializable {
