@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Client;
-import com.example.demo.entity.Event;
-import com.example.demo.entity.OnlineCheckIn;
-import com.example.demo.entity.Product;
+import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200/event")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -108,6 +105,20 @@ public class AdminController {
         return ResponseEntity.ok(adminService.isValid(username,password));
     }
 
+    @PutMapping("/loginFlag")
+    public ResponseEntity setFlag(@RequestBody Admin admin){
+        return  ResponseEntity.ok(adminService.putFlag(admin));
+    }
+
+    @GetMapping("/isLogged")
+    public ResponseEntity isLogged(){
+        return ResponseEntity.ok(adminService.isLogged());
+    }
+
+    @GetMapping("/getAdmin")
+    public ResponseEntity getAdmin(){
+        return ResponseEntity.ok(adminService.getAdmin());
+    }
     //endregion
 
 

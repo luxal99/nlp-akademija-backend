@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
-
-
-
-
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
@@ -25,6 +20,26 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String changePassword(String password) {
         return null;
+    }
+
+    @Override
+    public Boolean isLogged() {
+        long id = 1;
+        Admin admin = adminRepository.findById(id).get();
+        return admin.isLogged();
+    }
+
+    @Override
+    public Admin getAdmin() {
+        long id= 1;
+        Admin admin = adminRepository.findById(id).get();
+        return admin;
+    }
+
+    @Override
+    public Admin putFlag(Admin admin) {
+        adminRepository.save(admin);
+        return admin;
     }
 
     @Override

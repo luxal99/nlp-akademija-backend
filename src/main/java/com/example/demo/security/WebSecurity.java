@@ -9,7 +9,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-public class WebSecurity {
+public class WebSecurity  {
 
 
     @Bean
@@ -22,6 +22,7 @@ public class WebSecurity {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
 
 }
