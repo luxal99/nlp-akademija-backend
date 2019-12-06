@@ -5,19 +5,26 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author ThinkPad T470s
  */
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "admin")
-
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,17 +38,31 @@ public class Admin implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @Column(name = "is_logged")
+    @JsonProperty
+    private boolean isLogged;
 
     public Admin() {
     }
 
-    public Admin(String username) {
-        this.username = username;
+    public Admin(Long idLogin) {
+        this.idLogin = idLogin;
     }
 
-    public Admin(String username, String password) {
+    public Admin(Long idLogin, String username, String password, boolean isLogged) {
+        this.idLogin = idLogin;
         this.username = username;
         this.password = password;
+        this.isLogged = isLogged;
+    }
+
+    public Long getIdLogin() {
+        return idLogin;
+    }
+
+    public void setIdLogin(Long  idLogin) {
+        this.idLogin = idLogin;
     }
 
     public String getUsername() {
@@ -60,10 +81,18 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (username != null ? username.hashCode() : 0);
+        hash += (idLogin != null ? idLogin.hashCode() : 0);
         return hash;
     }
 
@@ -74,7 +103,7 @@ public class Admin implements Serializable {
             return false;
         }
         Admin other = (Admin) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
+        if ((this.idLogin == null && other.idLogin != null) || (this.idLogin != null && !this.idLogin.equals(other.idLogin))) {
             return false;
         }
         return true;
@@ -82,7 +111,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication2.Admin[ username=" + username + " ]";
+        return "javaapplication3.Admin[ idLogin=" + idLogin + " ]";
     }
     
 }
