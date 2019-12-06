@@ -23,18 +23,18 @@ import javax.persistence.Table;
  * @author ThinkPad T470s
  */
 @Entity
-@Table(name = "ONLINE_PURCHASE")
+@Table(name = "online_purchase")
 public class OnlinePurchase implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_ONLINE_PURCHASE")
+    @Column(name = "id_online_purchase")
     private Integer idOnlinePurchase;
-    @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID_CLIENT")
+    @JoinColumn(name = "id_client", referencedColumnName = "id_client")
     @ManyToOne(optional = false)
     private Client idClient;
-    @JoinColumn(name = "ID_PRODUCT", referencedColumnName = "ID_PRODUCT")
+    @JoinColumn(name = "id_product", referencedColumnName = "id_product")
     @ManyToOne(optional = false)
     private Product idProduct;
 

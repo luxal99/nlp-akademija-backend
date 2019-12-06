@@ -4,9 +4,10 @@ import com.example.demo.entity.OnlineCheckIn;
 import com.example.demo.entity.OnlinePurchase;
 import com.example.demo.repository.OnlinePurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OnlinePurchaseServiceImpl implements OnlinePurchaseService{
 
     @Autowired

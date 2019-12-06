@@ -39,7 +39,7 @@ public class Client implements Serializable {
     @Column(name = "mail",nullable = false)
     private String mail;
     @Basic(optional = false)
-    @Column(name = "telephone_num",nullable = false)
+    @Column(name = "telephone_num")
     private String telephoneNum;
     @OneToMany(cascade = CascadeType.REFRESH,mappedBy = "idClient",fetch = FetchType.LAZY)
     @JsonIgnore

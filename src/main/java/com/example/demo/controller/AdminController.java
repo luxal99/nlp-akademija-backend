@@ -96,30 +96,44 @@ public class AdminController {
 
     //endregion
 
-   //region --Login--
-@Autowired
+    //region --Login--
+    @Autowired
     private AdminService adminService;
 
     @GetMapping("/isLoginValid/{username}/{password}")
-    public ResponseEntity isValid(@PathVariable String username,@PathVariable String password){
-        return ResponseEntity.ok(adminService.isValid(username,password));
+    public ResponseEntity isValid(@PathVariable String username, @PathVariable String password) {
+        return ResponseEntity.ok(adminService.isValid(username, password));
     }
 
     @PutMapping("/loginFlag")
-    public ResponseEntity setFlag(@RequestBody Admin admin){
-        return  ResponseEntity.ok(adminService.putFlag(admin));
+    public ResponseEntity setFlag(@RequestBody Admin admin) {
+        return ResponseEntity.ok(adminService.putFlag(admin));
     }
 
     @GetMapping("/isLogged")
-    public ResponseEntity isLogged(){
+    public ResponseEntity isLogged() {
         return ResponseEntity.ok(adminService.isLogged());
     }
 
     @GetMapping("/getAdmin")
-    public ResponseEntity getAdmin(){
+    public ResponseEntity getAdmin() {
         return ResponseEntity.ok(adminService.getAdmin());
     }
     //endregion
 
+//region -- OnlinePurchase --
 
+    @Autowired
+    private OnlinePurchaseService onlinePurchaseService;
+
+    @PostMapping("/onlinePurchase/savePurchase")
+    public ResponseEntity savePurchase(@RequestBody OnlinePurchase onlinePurchase) {
+        return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase));
+    }
+
+    @GetMapping("onlinePurchase/getAll")
+    public ResponseEntity getAllPurchase() {
+        return ResponseEntity.ok(onlinePurchaseService.getAll());
+    }
+    //endregion
 }

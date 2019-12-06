@@ -44,7 +44,7 @@ public class Admin implements Serializable {
     private boolean isLogged;
 
     public Admin() {
-    }
+    }           
 
     public Admin(Long idLogin) {
         this.idLogin = idLogin;
