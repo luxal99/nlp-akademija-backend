@@ -175,7 +175,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>NlpAkademijaApplication</mainClass>
+                    <mainClass>com.example.demo.NlpAkademijaApplication</mainClass>
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
