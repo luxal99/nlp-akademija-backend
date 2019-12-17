@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(value = "https://157.230.25.201:8443")
 @RestController
     @RequestMapping("/admin")
 public class AdminController {
