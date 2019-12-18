@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(value = "https://157.230.25.201:8443")
 @RestController
-    @RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     //region --Event --
@@ -76,6 +77,45 @@ public class AdminController {
     public ResponseEntity saveClient(@RequestBody Client client) {
         return ResponseEntity.ok(clientService.save(client));
     }
+    //endregion
+
+    //region -- Comment --
+    @Autowired
+    private CommentService commentService;
+
+    @PostMapping("comment/saveComment")
+    public ResponseEntity saveComment(@RequestBody Comment comment) {
+        return ResponseEntity.ok(commentService.saveComment(comment));
+    }
+
+    @GetMapping("comment/getAllComments")
+    public ResponseEntity getAllComments() {
+        return ResponseEntity.ok(commentService.getAllComments());
+    }
+
+    @DeleteMapping("comments/deleteComment/{id}")
+    public ResponseEntity deleteComment(@PathVariable Long id) {
+        return ResponseEntity.ok(commentService.delete(id));
+    }
+    //endregion
+
+    //region -- CourseCheckin --
+
+    @Autowired
+    private CourseCheckinService courseCheckinService;
+
+    @PostMapping("courseCheckin/saveCourseCheckin")
+    public ResponseEntity saveCourseCheckin(@RequestBody CourseCheckin courseCheckin) {
+        return ResponseEntity.ok(courseCheckinService.save(courseCheckin));
+
+    }
+
+    @GetMapping("courseCheckin/getAllCourseCheckin")
+    public ResponseEntity getAllCourseCheckin() {
+        return ResponseEntity.ok(courseCheckinService.getAll());
+    }
+
+
     //endregion
 
     //region --OnlineCheckIn --

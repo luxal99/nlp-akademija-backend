@@ -1,18 +1,19 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Course;
-import com.example.demo.repository.CourseRepository;
+import com.example.demo.entity.CourseCheckin;
+import com.example.demo.repository.CourseCheckinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-public class CourseServiceImpl implements CourseService {
+@Service
+public class CourseCheckinServiceImpl implements CourseCheckinService {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseCheckinRepository courseRepository;
 
     @Override
-    public String save(Course course) {
+    public String save(CourseCheckin course) {
         courseRepository.save(course);
         return "Uspesno sacuvan kurs";
     }
@@ -24,13 +25,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public String update(Course course) {
+    public String update(CourseCheckin course) {
         courseRepository.save(course);
         return "Uspesno sacuvan kurs";
     }
 
     @Override
-    public List<Course> getAll() {
+    public List<CourseCheckin> getAll() {
         return courseRepository.findAll();
     }
 }
