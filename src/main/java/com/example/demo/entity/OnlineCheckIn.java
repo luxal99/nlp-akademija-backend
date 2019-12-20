@@ -5,6 +5,7 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -32,6 +33,7 @@ public class OnlineCheckIn implements Serializable {
     @Basic(optional = false)
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd-MMM-yyyy")
     private Date date;
     @Column(name = "time", nullable = false)
     private String time;

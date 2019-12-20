@@ -38,7 +38,7 @@ public class Event implements Serializable {
     @Basic(optional = false)
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM")
+    @JsonFormat(pattern="dd-MMM")
     private Date date;
     @Column(name = "TIME")
     private String time;
