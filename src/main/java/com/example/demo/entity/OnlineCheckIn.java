@@ -17,7 +17,7 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- * @author ThinkPad T470s
+ * @author ThinkPad T470s   A
  */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -33,7 +33,7 @@ public class OnlineCheckIn implements Serializable {
     @Basic(optional = false)
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MMM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
     @Column(name = "time", nullable = false)
     private String time;
