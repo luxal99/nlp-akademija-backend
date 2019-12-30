@@ -77,6 +77,11 @@ public class AdminController {
     public ResponseEntity saveClient(@RequestBody Client client) {
         return ResponseEntity.ok(clientService.save(client));
     }
+
+    @GetMapping("client/getAllClients")
+    public ResponseEntity getAllClients(){
+        return ResponseEntity.ok(clientService.getAll());
+    }
     //endregion
 
     //region -- Comment --
