@@ -5,8 +5,6 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -24,11 +22,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ThinkPad T470s
+ * @author ThinkPad T470
  */
 @Entity
 @Table(name = "event")
+
 public class Event implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +36,8 @@ public class Event implements Serializable {
     @Column(name = "ID_EVENT")
     private Long idEvent;
     @Basic(optional = false)
-    @Column(name = "DATE")
-    @Temporal(TemporalType.DATE)
-   @JsonFormat(pattern="dd-MM")
-    private Date date;
+
+    private String date;
     @Column(name = "TIME")
     private String time;
     @Column(name = "TITLE")
@@ -54,7 +52,7 @@ public class Event implements Serializable {
         this.idEvent = idEvent;
     }
 
-    public Event(Long idEvent, Date date) {
+    public Event(Long idEvent, String date) {
         this.idEvent = idEvent;
         this.date = date;
     }
@@ -67,11 +65,11 @@ public class Event implements Serializable {
         this.idEvent = idEvent;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -121,7 +119,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication2.Event_1[ idEvent=" + idEvent + " ]";
+        return "javaapplication1.Event[ idEvent=" + idEvent + " ]";
     }
     
 }

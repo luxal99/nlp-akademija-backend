@@ -14,7 +14,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public String save(Event event) {
         eventRepository.save(event);
-        return "Uspešno kreiran događaj";
+        return "Uspesno kreiran dogadjaj";
     }
 
     @Override
