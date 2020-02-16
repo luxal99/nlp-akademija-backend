@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.MailDTO;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @CrossOrigin(value = "https://157.230.25.201:8443")
@@ -178,6 +180,16 @@ public class AdminController {
     @GetMapping("onlinePurchase/getAll")
     public ResponseEntity getAllPurchase() {
         return ResponseEntity.ok(onlinePurchaseService.getAll());
+    }
+    //endregion
+
+    //region --SendMail--
+    @Autowired
+    private AdminService sendMailAdminService;
+
+    @PostMapping("/sendMail")
+    public ResponseEntity sendMail(@RequestBody MailDTO mailDTO) throws MessagingException {
+        return ResponseEntity.ok(sendMailAdminService.sendMail(mailDTO));
     }
     //endregion
 }
