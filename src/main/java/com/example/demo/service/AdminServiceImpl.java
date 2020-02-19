@@ -74,7 +74,7 @@ public class AdminServiceImpl implements AdminService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("nlpmasterakademija@gmail.com", "     ");
+                return new PasswordAuthentication("nlpmasterakademija@gmail.com", "Preparantus");
             }
         });
 
