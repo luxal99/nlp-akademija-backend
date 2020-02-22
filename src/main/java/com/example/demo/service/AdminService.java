@@ -13,5 +13,5 @@ public interface AdminService {
     public Admin getAdmin();
     public Admin putFlag(Admin admin);
     public boolean isValid(String username,String password);
-    public String sendMail(MailDTO mailDTO) throws MessagingException;
+    public String sendMail(MailDTO mailDTO) throws MessagingException, InterruptedException;
 }

@@ -188,7 +188,7 @@ public class AdminController {
     private AdminService sendMailAdminService;
 
     @PostMapping("/sendMail")
-    public ResponseEntity sendMail(@RequestBody MailDTO mailDTO) throws MessagingException {
+    public ResponseEntity sendMail(@RequestBody MailDTO mailDTO) throws MessagingException, InterruptedException {
         return ResponseEntity.ok(sendMailAdminService.sendMail(mailDTO));
     }
     //endregion
