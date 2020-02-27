@@ -183,6 +183,11 @@ public class AdminController {
     }
     //endregion
 
+    //region -- Training --
+
+
+    //endregion
+
     //region --SendMail--
     @Autowired
     private AdminService sendMailAdminService;
