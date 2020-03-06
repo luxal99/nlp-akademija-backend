@@ -5,89 +5,53 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author ThinkPad T470s   A
+ *
+ * @author ThinkPad T480s
  */
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "online_check_in")
+
 public class OnlineCheckIn implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_check_in", nullable = false)
-    private Long idCheckIn;
-    @Basic(optional = false)
-    @Column(name = "date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date;
-    @Column(name = "time", nullable = false)
-    private String time;
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "id_check_in")
+    private Integer idCheckIn;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private Client idClient;
 
     public OnlineCheckIn() {
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-
-    public OnlineCheckIn(Long idCheckIn) {
+    public OnlineCheckIn(Integer idCheckIn) {
         this.idCheckIn = idCheckIn;
     }
 
-    public OnlineCheckIn(Long idCheckIn, Date date) {
-        this.idCheckIn = idCheckIn;
-        this.date = date;
-    }
-
-    public Long getIdCheckIn() {
+    public Integer getIdCheckIn() {
         return idCheckIn;
     }
 
-    public void setIdCheckIn(Long idCheckIn) {
+    public void setIdCheckIn(Integer idCheckIn) {
         this.idCheckIn = idCheckIn;
     }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
 
     public Client getIdClient() {
         return idClient;
@@ -121,5 +85,5 @@ public class OnlineCheckIn implements Serializable {
     public String toString() {
         return "javaapplication2.OnlineCheckIn[ idCheckIn=" + idCheckIn + " ]";
     }
-
+    
 }
