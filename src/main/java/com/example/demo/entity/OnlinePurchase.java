@@ -45,10 +45,10 @@ public class OnlinePurchase implements Serializable {
     @Column(name = "country")
     private String country;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Client idClient;
     @JoinColumn(name = "id_product", referencedColumnName = "id_product")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Product idProduct;
 
     public OnlinePurchase() {

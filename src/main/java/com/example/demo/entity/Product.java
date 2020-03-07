@@ -5,6 +5,8 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,7 +49,8 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "price")
     private long price;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct")
     private List<OnlinePurchase> onlinePurchaseList;
 
     public Product() {

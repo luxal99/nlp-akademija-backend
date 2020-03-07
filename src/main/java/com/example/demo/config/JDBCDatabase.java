@@ -20,9 +20,6 @@ public class JDBCDatabase {
     }
 
     public static String inserPurchase(List<OnlinePurchase> onlinePurchaseList) {
-    for (int i =0;i<onlinePurchaseList.size();i++){
-        System.out.println(onlinePurchaseList.get(i).getIdProduct().toString());
-    }
         try {
             openConection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into nlp_akademija.online_purchase(id_client, id_product, comment, social_link, country) values (?,?,?,?,?)");
