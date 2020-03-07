@@ -10,10 +10,10 @@ import java.util.List;
 
 public class JDBCDatabase {
     private static Connection connection = null;
-    private static String url = "jdbc:mysql://35.246.218.201 :3306";
+    private static String url = "jdbc:mysql://35.246.218.201:3306";
     private static String username = "luxal";
     private static String password = "Lukic.aleksa99";
-    private static String databaseName = "nlp_akademija_dev";
+    private static String databaseName = "nlp_akademija";
 
     public static void openConection() throws SQLException {
         connection = DriverManager.getConnection(url + "/" + databaseName, username, password);
@@ -25,7 +25,7 @@ public class JDBCDatabase {
     }
         try {
             openConection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into nlp_akademija_dev.online_purchase(id_client, id_product, comment, social_link, country) values (?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into nlp_akademija.online_purchase(id_client, id_product, comment, social_link, country) values (?,?,?,?,?)");
             for (int i = 0; i < onlinePurchaseList.size(); i++) {
                 preparedStatement.setLong(1, onlinePurchaseList.get(i).getIdClient().getIdClient());
                 preparedStatement.setLong(2, onlinePurchaseList.get(i).getIdProduct().getIdProduct());

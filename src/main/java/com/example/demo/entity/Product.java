@@ -5,25 +5,33 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ThinkPad T470s
+ * @author ThinkPad T480s
  */
 @Entity
 @Table(name = "product")
 public class Product implements Serializable {
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct",fetch = FetchType.LAZY)
-    private List<OnlinePurchase> onlinePurchaseList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,23 +39,18 @@ public class Product implements Serializable {
     @Column(name = "id_product")
     private Long idProduct;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
     @Column(name = "title")
     private String title;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "price")
     private long price;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct", fetch = FetchType.LAZY)
+    private List<OnlinePurchase> onlinePurchaseList;
 
     public Product() {
-    }
-
-    public Product(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public Product(Long idProduct, String title, long price) {
-        this.idProduct = idProduct;
-        this.title = title;
-        this.price = price;
     }
 
     public Long getIdProduct() {
@@ -74,6 +77,15 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    @XmlTransient
+    public List<OnlinePurchase> getOnlinePurchaseList() {
+        return onlinePurchaseList;
+    }
+
+    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
+        this.onlinePurchaseList = onlinePurchaseList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -96,16 +108,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication2.Product_1[ idProduct=" + idProduct + " ]";
-    }
-
-    @XmlTransient
-    public List<OnlinePurchase> getOnlinePurchaseList() {
-        return onlinePurchaseList;
-    }
-
-    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
-        this.onlinePurchaseList = onlinePurchaseList;
+        return "com.example.demo.entity.Product[ idProduct=" + idProduct + " ]";
     }
     
 }

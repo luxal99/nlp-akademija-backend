@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "online_purchase")
-
 public class OnlinePurchase implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,10 +45,10 @@ public class OnlinePurchase implements Serializable {
     @Column(name = "country")
     private String country;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Client idClient;
     @JoinColumn(name = "id_product", referencedColumnName = "id_product")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Product idProduct;
 
     public OnlinePurchase() {

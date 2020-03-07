@@ -29,22 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "client")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
-    , @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient")
-    , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
-    , @NamedQuery(name = "Client.findByLastname", query = "SELECT c FROM Client c WHERE c.lastname = :lastname")
-    , @NamedQuery(name = "Client.findByMail", query = "SELECT c FROM Client c WHERE c.mail = :mail")
-    , @NamedQuery(name = "Client.findByTelephoneNum", query = "SELECT c FROM Client c WHERE c.telephoneNum = :telephoneNum")})
 public class Client implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_client")
-    private Integer idClient;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
@@ -63,61 +49,25 @@ public class Client implements Serializable {
     @Size(max = 64)
     @Column(name = "telephone_num")
     private String telephoneNum;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_client")
+    private Long idClient;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
     private List<OnlinePurchase> onlinePurchaseList;
 
     public Client() {
     }
 
-    public Client(Integer idClient) {
-        this.idClient = idClient;
-    }
-
-    public Client(Integer idClient, String name, String lastname, String mail) {
-        this.idClient = idClient;
-        this.name = name;
-        this.lastname = lastname;
-        this.mail = mail;
-    }
-
-    public Integer getIdClient() {
+    public Long getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(Integer idClient) {
+    public void setIdClient(Long idClient) {
         this.idClient = idClient;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getTelephoneNum() {
-        return telephoneNum;
-    }
-
-    public void setTelephoneNum(String telephoneNum) {
-        this.telephoneNum = telephoneNum;
     }
 
     @XmlTransient
@@ -153,5 +103,39 @@ public class Client implements Serializable {
     public String toString() {
         return "com.example.demo.entity.Client[ idClient=" + idClient + " ]";
     }
+
+
+    public String getTelephoneNum() {
+        return telephoneNum;
+    }
+
+    public void setTelephoneNum(String telephoneNum) {
+        this.telephoneNum = telephoneNum;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     
 }

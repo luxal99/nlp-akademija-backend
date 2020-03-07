@@ -1,17 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.config.JDBCDatabase;
-import com.example.demo.entity.OnlineCheckIn;
 import com.example.demo.entity.OnlinePurchase;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.OnlinePurchaseRepository;
-import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
