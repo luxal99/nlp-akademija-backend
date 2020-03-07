@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -25,6 +26,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "online_purchase")
 public class OnlinePurchase implements Serializable {
+
+    @Size(max = 512)
+    @Column(name = "comment")
+    private String comment;
+    @Size(max = 128)
+    @Column(name = "social_link")
+    private String socialLink;
+    @Size(max = 32)
+    @Column(name = "country")
+    private String country;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,6 +103,30 @@ public class OnlinePurchase implements Serializable {
     @Override
     public String toString() {
         return "javaapplication2.OnlinePurchase[ idOnlinePurchase=" + idOnlinePurchase + " ]";
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getSocialLink() {
+        return socialLink;
+    }
+
+    public void setSocialLink(String socialLink) {
+        this.socialLink = socialLink;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
     
 }

@@ -81,7 +81,7 @@ public class AdminController {
     }
 
     @GetMapping("client/getAllClients")
-    public ResponseEntity getAllClients(){
+    public ResponseEntity getAllClients() {
         return ResponseEntity.ok(clientService.getAll());
     }
     //endregion
@@ -172,9 +172,9 @@ public class AdminController {
     @Autowired
     private OnlinePurchaseService onlinePurchaseService;
 
-    @PostMapping("/onlinePurchase/savePurchase")
-    public ResponseEntity savePurchase(@RequestBody OnlinePurchase onlinePurchase) {
-        return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase));
+    @PostMapping("/onlinePurchase/savePurchase/{listOfProducts}")
+    public ResponseEntity savePurchase(@PathVariable Long[] listOfProducts,@RequestBody OnlinePurchase onlinePurchase) {
+        return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase,listOfProducts));
     }
 
     @GetMapping("onlinePurchase/getAll")
@@ -197,4 +197,9 @@ public class AdminController {
         return ResponseEntity.ok(sendMailAdminService.sendMail(mailDTO));
     }
     //endregion
+
+    @GetMapping("/getProductById/{id}")
+    public ResponseEntity getProductById(@PathVariable Long id){
+        return ResponseEntity.ok(productService.findProductById(id));
+    }
 }

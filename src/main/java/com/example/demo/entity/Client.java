@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +24,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "client")
 public class Client implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
+    private List<OnlinePurchase> onlinePurchaseList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -134,6 +138,15 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         return "javaapplication3.Client[ idClient=" + idClient + " ]";
+    }
+
+    @XmlTransient
+    public List<OnlinePurchase> getOnlinePurchaseList() {
+        return onlinePurchaseList;
+    }
+
+    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
+        this.onlinePurchaseList = onlinePurchaseList;
     }
     
 }
