@@ -173,8 +173,10 @@ public class AdminController {
     private OnlinePurchaseService onlinePurchaseService;
 
     @PostMapping("/onlinePurchase/savePurchase/{listOfProducts}")
-    public ResponseEntity savePurchase(@PathVariable Long[] listOfProducts,@RequestBody OnlinePurchase onlinePurchase) {
-        return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase,listOfProducts));
+    public ResponseEntity savePurchase(@PathVariable Long[] listOfProducts,@RequestBody OnlinePurchase onlinePurchase) throws InterruptedException {
+
+            return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase,listOfProducts));
+
     }
 
     @GetMapping("onlinePurchase/getAll")

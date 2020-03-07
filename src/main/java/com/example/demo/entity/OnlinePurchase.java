@@ -18,15 +18,23 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ThinkPad T470s
+ * @author ThinkPad T480s
  */
 @Entity
 @Table(name = "online_purchase")
+
 public class OnlinePurchase implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_online_purchase")
+    private Long idOnlinePurchase;
     @Size(max = 512)
     @Column(name = "comment")
     private String comment;
@@ -36,12 +44,6 @@ public class OnlinePurchase implements Serializable {
     @Size(max = 32)
     @Column(name = "country")
     private String country;
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_online_purchase")
-    private Integer idOnlinePurchase;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
     @ManyToOne(optional = false)
     private Client idClient;
@@ -52,16 +54,36 @@ public class OnlinePurchase implements Serializable {
     public OnlinePurchase() {
     }
 
-    public OnlinePurchase(Integer idOnlinePurchase) {
-        this.idOnlinePurchase = idOnlinePurchase;
-    }
-
-    public Integer getIdOnlinePurchase() {
+    public Long getIdOnlinePurchase() {
         return idOnlinePurchase;
     }
 
-    public void setIdOnlinePurchase(Integer idOnlinePurchase) {
+    public void setIdOnlinePurchase(Long idOnlinePurchase) {
         this.idOnlinePurchase = idOnlinePurchase;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getSocialLink() {
+        return socialLink;
+    }
+
+    public void setSocialLink(String socialLink) {
+        this.socialLink = socialLink;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Client getIdClient() {
@@ -102,31 +124,7 @@ public class OnlinePurchase implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication2.OnlinePurchase[ idOnlinePurchase=" + idOnlinePurchase + " ]";
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getSocialLink() {
-        return socialLink;
-    }
-
-    public void setSocialLink(String socialLink) {
-        this.socialLink = socialLink;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+        return "com.example.demo.entity.OnlinePurchase[ idOnlinePurchase=" + idOnlinePurchase + " ]";
     }
     
 }

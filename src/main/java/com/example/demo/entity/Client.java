@@ -5,60 +5,66 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ThinkPad T470s
+ * @author ThinkPad T480s
  */
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "client")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
+    , @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient")
+    , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
+    , @NamedQuery(name = "Client.findByLastname", query = "SELECT c FROM Client c WHERE c.lastname = :lastname")
+    , @NamedQuery(name = "Client.findByMail", query = "SELECT c FROM Client c WHERE c.mail = :mail")
+    , @NamedQuery(name = "Client.findByTelephoneNum", query = "SELECT c FROM Client c WHERE c.telephoneNum = :telephoneNum")})
 public class Client implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    private List<OnlinePurchase> onlinePurchaseList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_client",nullable = false)
+    @Column(name = "id_client")
     private Integer idClient;
     @Basic(optional = false)
-    @Column(name = "name",nullable = false)
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "lastname",nullable = false)
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Column(name = "lastname")
     private String lastname;
     @Basic(optional = false)
-    @Column(name = "mail",nullable = false)
+    @NotNull
+    @Size(min = 1, max = 128)
+    @Column(name = "mail")
     private String mail;
-    @Basic(optional = false)
+    @Size(max = 64)
     @Column(name = "telephone_num")
     private String telephoneNum;
-    @OneToMany(cascade = CascadeType.REFRESH,mappedBy = "idClient",fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<OnlineCheckIn> onlineCheckInList;
-
-
-    public List<OnlineCheckIn> getOnlineCheckInList() {
-        return onlineCheckInList;
-    }
-
-    public void setOnlineCheckInList(List<OnlineCheckIn> onlineCheckInList) {
-        this.onlineCheckInList = onlineCheckInList;
-    }
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
+    private List<OnlinePurchase> onlinePurchaseList;
 
     public Client() {
     }
@@ -67,12 +73,11 @@ public class Client implements Serializable {
         this.idClient = idClient;
     }
 
-    public Client(Integer idClient, String name, String lastname, String mail, String telephoneNum) {
+    public Client(Integer idClient, String name, String lastname, String mail) {
         this.idClient = idClient;
         this.name = name;
         this.lastname = lastname;
         this.mail = mail;
-        this.telephoneNum = telephoneNum;
     }
 
     public Integer getIdClient() {
@@ -115,6 +120,15 @@ public class Client implements Serializable {
         this.telephoneNum = telephoneNum;
     }
 
+    @XmlTransient
+    public List<OnlinePurchase> getOnlinePurchaseList() {
+        return onlinePurchaseList;
+    }
+
+    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
+        this.onlinePurchaseList = onlinePurchaseList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,16 +151,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "javaapplication3.Client[ idClient=" + idClient + " ]";
-    }
-
-    @XmlTransient
-    public List<OnlinePurchase> getOnlinePurchaseList() {
-        return onlinePurchaseList;
-    }
-
-    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
-        this.onlinePurchaseList = onlinePurchaseList;
+        return "com.example.demo.entity.Client[ idClient=" + idClient + " ]";
     }
     
 }
