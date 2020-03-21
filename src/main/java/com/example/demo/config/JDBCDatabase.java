@@ -12,7 +12,7 @@ public class JDBCDatabase {
     private static Connection connection = null;
     private static String url = "jdbc:mysql://127.0.0.1:3306";
     private static String username = "root";
-    private static String password = "Luxal.99";
+    private static String password = "luxal99";
     private static String databaseName = "nlp_akademija";
 
     public static void openConection() throws SQLException {
