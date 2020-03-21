@@ -1,0 +1,36 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.Event;
+import com.example.demo.repository.EventRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public class EventServiceImpl implements EventService {
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Override
+    public String save(Event event) {
+        eventRepository.save(event);
+        return "Uspesno kreiran dogadjaj";
+    }
+
+    @Override
+    public String delete(Long id) {
+        eventRepository.deleteById(id);
+        return "Uspesno obrisan";
+    }
+
+    @Override
+    public String update(Event event) {
+        eventRepository.save(event);
+        return "Uspesno izmenjen";
+    }
+
+    @Override
+    public List<Event> getAll() {
+        return eventRepository.findAll();
+    }
+}
