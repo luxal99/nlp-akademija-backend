@@ -5,12 +5,9 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,15 +53,8 @@ public class Client implements Serializable {
     private String mail;
     @Column(name = "telephone_num")
     private String telephoneNum;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    private List<CourseCheckin> courseCheckinList;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    private List<OnlinePurchase> onlinePurchaseList;
-    @JsonIgnore
     @OneToMany(mappedBy = "idClient")
-    private List<OnlineCheckIn> onlineCheckInList;
+    private List<OnlineTrainingCheckin> onlineTrainingCheckinList;
 
     public Client() {
     }
@@ -121,30 +111,12 @@ public class Client implements Serializable {
     }
 
     @XmlTransient
-    public List<CourseCheckin> getCourseCheckinList() {
-        return courseCheckinList;
+    public List<OnlineTrainingCheckin> getOnlineTrainingCheckinList() {
+        return onlineTrainingCheckinList;
     }
 
-    public void setCourseCheckinList(List<CourseCheckin> courseCheckinList) {
-        this.courseCheckinList = courseCheckinList;
-    }
-
-    @XmlTransient
-    public List<OnlinePurchase> getOnlinePurchaseList() {
-        return onlinePurchaseList;
-    }
-
-    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
-        this.onlinePurchaseList = onlinePurchaseList;
-    }
-
-    @XmlTransient
-    public List<OnlineCheckIn> getOnlineCheckInList() {
-        return onlineCheckInList;
-    }
-
-    public void setOnlineCheckInList(List<OnlineCheckIn> onlineCheckInList) {
-        this.onlineCheckInList = onlineCheckInList;
+    public void setOnlineTrainingCheckinList(List<OnlineTrainingCheckin> onlineTrainingCheckinList) {
+        this.onlineTrainingCheckinList = onlineTrainingCheckinList;
     }
 
     @Override

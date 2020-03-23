@@ -5,7 +5,10 @@ import com.example.demo.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -30,7 +33,9 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> getAll() {
-        return clientRepository.findAll();
+    public Set<Client> getAll() {
+        Set<Client> clientSet = new HashSet<>(clientRepository.findAll());
+
+        return clientSet;
     }
 }

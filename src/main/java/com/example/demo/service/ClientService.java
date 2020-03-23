@@ -3,11 +3,12 @@ package com.example.demo.service;
 import com.example.demo.entity.Client;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ClientService  {
 
     public Client save(Client client);
     public String delete(Long id);
     public String update(Client client);
-    public List<Client> getAll();
+    public Set<Client> getAll();
 }
