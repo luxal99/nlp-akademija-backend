@@ -264,4 +264,21 @@ public class AdminController {
     }
 
 
+    @Autowired
+    private OnlineTrainingCheckinService onlineTrainingCheckinService;
+
+        @PostMapping("onlineTraining/saveOnlineTraining")
+    public ResponseEntity saveOnlineTraining(@RequestBody OnlineTrainingCheckin onlineTrainingCheckin) {
+        return ResponseEntity.ok(onlineTrainingCheckinService.save(onlineTrainingCheckin));
+    }
+
+    @GetMapping("/onlineTraining/getAllOnlineTraining")
+    public ResponseEntity<List<OnlineTrainingCheckin>> getAllTrraining() {
+        return ResponseEntity.ok(onlineTrainingCheckinService.getAll());
+    }
+
+    @DeleteMapping("/onlineTraining/deleteOnlineTraining/{idOnlineTraining}")
+    public ResponseEntity deleteOnlineTraining(@PathVariable Long idOnlineTraining) {
+        return ResponseEntity.ok(onlineTrainingCheckinService.deleteTrainingCheckin(idOnlineTraining));
+    }
 }

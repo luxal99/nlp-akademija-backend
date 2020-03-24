@@ -37,7 +37,7 @@ public class OnlineTrainingCheckin implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_online_training")
-    private Integer idOnlineTraining;
+    private Long idOnlineTraining;
     @Column(name = "title")
     private String title;
     @JoinColumn(name = "id_client", referencedColumnName = "id_client")
@@ -47,15 +47,11 @@ public class OnlineTrainingCheckin implements Serializable {
     public OnlineTrainingCheckin() {
     }
 
-    public OnlineTrainingCheckin(Integer idOnlineTraining) {
-        this.idOnlineTraining = idOnlineTraining;
-    }
-
-    public Integer getIdOnlineTraining() {
+    public Long getIdOnlineTraining() {
         return idOnlineTraining;
     }
 
-    public void setIdOnlineTraining(Integer idOnlineTraining) {
+    public void setIdOnlineTraining(Long idOnlineTraining) {
         this.idOnlineTraining = idOnlineTraining;
     }
 
