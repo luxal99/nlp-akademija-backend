@@ -44,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
 
             clientList.add(clientWithoudId);
         }
-
+        System.out.println("True");
         Set<ClientDTO> clientSet = new HashSet<>(clientList);
         return clientSet;
     }
