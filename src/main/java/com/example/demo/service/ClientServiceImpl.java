@@ -1,21 +1,21 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.ClientDTO;
 import com.example.demo.entity.Client;
 import com.example.demo.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
     @Override
-        public Client save(Client client) {
+    public Client save(Client client) {
         clientRepository.save(client);
         return client;
     }
@@ -33,9 +33,19 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Set<Client> getAll() {
-        Set<Client> clientSet = new HashSet<>(clientRepository.findAll());
+    public Set<ClientDTO> getAll() {
+        List<ClientDTO> clientList = new ArrayList<>();
+        for (Client client :
+                clientRepository.findAll()) {
+            ClientDTO clientWithoudId = new ClientDTO();
+            clientWithoudId.setName(client.getName());
+            clientWithoudId.setLastname(client.getLastname());
+            clientWithoudId.setMail(client.getMail());
 
+            clientList.add(clientWithoudId);
+        }
+
+        Set<ClientDTO> clientSet = new HashSet<>(clientList);
         return clientSet;
     }
 }
