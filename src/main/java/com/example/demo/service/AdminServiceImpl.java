@@ -102,13 +102,13 @@ public class AdminServiceImpl implements AdminService {
         };
 
         for (int i = 0; i < arrThred.length; i++) {
-            System.out.println("Threar: "+i);
+            System.out.println("Threard: "+i);
             if (i == 5) {
                 arrThred[i].start();
                 Thread.sleep(45000);
             }else if(i==9){
                 arrThred[i].start();
-                Thread.sleep(10000);
+                Thread.sleep(30000);
             }
             else {
                 arrThred[i].start();
