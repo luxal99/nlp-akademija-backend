@@ -53,6 +53,9 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @Column(name = "mail")
     private String mail;
+    @Basic(optional = false)
+    @Column(name = "date")
+    private String date;
     @Column(name = "telephone_num")
     private String telephoneNum;
     @JsonIgnore
@@ -120,6 +123,14 @@ public class Client implements Serializable {
 
     public void setOnlineTrainingCheckinList(List<OnlineTrainingCheckin> onlineTrainingCheckinList) {
         this.onlineTrainingCheckinList = onlineTrainingCheckinList;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override

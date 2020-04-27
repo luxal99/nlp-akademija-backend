@@ -6,6 +6,7 @@ import com.example.demo.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -16,6 +17,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client save(Client client) {
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+        client.setDate(date);
         clientRepository.save(client);
         return client;
     }
@@ -48,4 +53,6 @@ public class ClientServiceImpl implements ClientService {
         Set<ClientDTO> clientSet = new HashSet<>(clientList);
         return clientSet;
     }
+
+
 }

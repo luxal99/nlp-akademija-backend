@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.mail.MessagingException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
@@ -195,7 +196,30 @@ public class AdminController {
     //endregion
 
     //region -- Training --
+    
+    @Autowired
+    private OnlineTrainingCheckinService onlineTrainingCheckinService;
 
+    @PostMapping("onlineTraining/saveOnlineTraining")
+    public ResponseEntity saveOnlineTraining(@RequestBody OnlineTrainingCheckin onlineTrainingCheckin) {
+        return ResponseEntity.ok(onlineTrainingCheckinService.save(onlineTrainingCheckin));
+    }
+
+    @GetMapping("/onlineTraining/getAllOnlineTraining")
+    public ResponseEntity<List<OnlineTrainingCheckin>> getAllTrraining() {
+        return ResponseEntity.ok(onlineTrainingCheckinService.getAll());
+    }
+
+    @DeleteMapping("/onlineTraining/deleteOnlineTraining/{idOnlineTraining}")
+    public ResponseEntity deleteOnlineTraining(@PathVariable Long idOnlineTraining) {
+        return ResponseEntity.ok(onlineTrainingCheckinService.deleteTrainingCheckin(idOnlineTraining));
+    }
+
+    @PostMapping("client/search")
+    public ResponseEntity<List<OnlineTrainingCheckin>> searchClient(@RequestBody Date date) {
+        System.out.println(date.toString());
+        return ResponseEntity.ok(onlineTrainingCheckinService.findClienByDate(date));
+    }
 
     //endregion
 
@@ -264,21 +288,4 @@ public class AdminController {
     }
 
 
-    @Autowired
-    private OnlineTrainingCheckinService onlineTrainingCheckinService;
-
-        @PostMapping("onlineTraining/saveOnlineTraining")
-    public ResponseEntity saveOnlineTraining(@RequestBody OnlineTrainingCheckin onlineTrainingCheckin) {
-        return ResponseEntity.ok(onlineTrainingCheckinService.save(onlineTrainingCheckin));
-    }
-
-    @GetMapping("/onlineTraining/getAllOnlineTraining")
-    public ResponseEntity<List<OnlineTrainingCheckin>> getAllTrraining() {
-        return ResponseEntity.ok(onlineTrainingCheckinService.getAll());
-    }
-
-    @DeleteMapping("/onlineTraining/deleteOnlineTraining/{idOnlineTraining}")
-    public ResponseEntity deleteOnlineTraining(@PathVariable Long idOnlineTraining) {
-        return ResponseEntity.ok(onlineTrainingCheckinService.deleteTrainingCheckin(idOnlineTraining));
-    }
 }
