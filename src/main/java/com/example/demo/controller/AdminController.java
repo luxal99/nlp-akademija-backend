@@ -177,7 +177,7 @@ public class AdminController {
     }
     //endregion
 
-//region -- OnlinePurchase --
+    //region -- OnlinePurchase --
 
     @Autowired
     private OnlinePurchaseService onlinePurchaseService;
@@ -196,7 +196,7 @@ public class AdminController {
     //endregion
 
     //region -- Training --
-    
+
     @Autowired
     private OnlineTrainingCheckinService onlineTrainingCheckinService;
 
