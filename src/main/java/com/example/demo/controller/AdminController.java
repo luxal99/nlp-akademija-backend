@@ -26,157 +26,6 @@ import java.util.zip.Inflater;
 @RequestMapping("/admin")
 public class AdminController {
 
-    //region --Event --
-    @Autowired
-    private EventService eventService;
-
-    @GetMapping("event/getAllEvents")
-    public ResponseEntity<List<Event>> getAllEvents() {
-        return ResponseEntity.ok(eventService.getAll());
-    }
-
-    @PostMapping("event/saveEvent")
-    public ResponseEntity saveEvent(@RequestBody Event event) {
-        return ResponseEntity.ok(eventService.save(event));
-    }
-
-    @DeleteMapping("event/deleteEvent/{id}")
-    public ResponseEntity deleteEvent(@PathVariable Long id) {
-        return ResponseEntity.ok(eventService.delete(id));
-    }
-
-    @PutMapping("event/updateEvent")
-    public ResponseEntity updateEvent(@RequestBody Event event) {
-        return ResponseEntity.ok(eventService.update(event));
-
-    }
-
-
-    //endregion
-
-    //region -- Product --
-
-    @Autowired
-    private ProductService productService;
-
-    @PostMapping("product/saveProduct")
-    public ResponseEntity saveProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
-    }
-
-    @GetMapping("product/getAllProduct")
-    public ResponseEntity getAllProduct() {
-        return ResponseEntity.ok(productService.getALL());
-    }
-
-    @DeleteMapping("product/deleteProduct/{id}")
-    public ResponseEntity deleteProduct(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.delete(id));
-    }
-
-    @PutMapping("product/updateProduct")
-    public ResponseEntity updateProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.update(product));
-    }
-
-    //endregion
-
-    //region -- Client --
-    @Autowired
-    private ClientService clientService;
-
-    @PostMapping("client/saveClient")
-    public ResponseEntity saveClient(@RequestBody Client client) {
-        return ResponseEntity.ok(clientService.save(client));
-    }
-
-    @GetMapping("client/getAllClients")
-    public ResponseEntity getAllClients() {
-        return ResponseEntity.ok(clientService.getAll());
-    }
-    //endregion
-
-    //region -- Comment --
-    @Autowired
-    private CommentService commentService;
-
-    @PostMapping("comment/saveComment")
-    public ResponseEntity saveComment(@RequestBody Comment comment) {
-        return ResponseEntity.ok(commentService.saveComment(comment));
-    }
-
-    @GetMapping("comment/getAllComments")
-    public ResponseEntity getAllComments() {
-        return ResponseEntity.ok(commentService.getAllComments());
-    }
-
-    @DeleteMapping("comments/deleteComment/{id}")
-    public ResponseEntity deleteComment(@PathVariable Long id) {
-        return ResponseEntity.ok(commentService.delete(id));
-    }
-    //endregion
-
-    //region -- CourseCheckin --
-
-    @Autowired
-    private CourseCheckinService courseCheckinService;
-
-    @PostMapping("courseCheckin/saveCourseCheckin")
-    public ResponseEntity saveCourseCheckin(@RequestBody CourseCheckin courseCheckin) {
-        return ResponseEntity.ok(courseCheckinService.save(courseCheckin));
-
-    }
-
-    @GetMapping("courseCheckin/getAllCourseCheckin")
-    public ResponseEntity getAllCourseCheckin() {
-        return ResponseEntity.ok(courseCheckinService.getAll());
-    }
-
-
-    //endregion
-
-    //region --OnlineCheckIn --
-
-    @Autowired
-    private OnlineCheckInService onlineCheckInService;
-
-    @PostMapping("checkin/saveCheckIn")
-    public ResponseEntity saveCheckIn(@RequestBody OnlineCheckIn onlineCheckIn) {
-        return ResponseEntity.ok(onlineCheckInService.save(onlineCheckIn));
-    }
-
-    @GetMapping("checkin/getAll")
-    public ResponseEntity getAll() {
-        return ResponseEntity.ok(onlineCheckInService.getAll());
-    }
-
-    //endregion
-
-    //region --Login--
-    @Autowired
-    private AdminService adminService;
-
-    @GetMapping("/isLoginValid/{username}/{password}")
-    public ResponseEntity isValid(@PathVariable String username, @PathVariable String password) {
-        return ResponseEntity.ok(adminService.isValid(username, password));
-    }
-
-    @PutMapping("/loginFlag")
-    public ResponseEntity setFlag(@RequestBody Admin admin) {
-        return ResponseEntity.ok(adminService.putFlag(admin));
-    }
-
-    @GetMapping("/isLogged")
-    public ResponseEntity isLogged() {
-        return ResponseEntity.ok(adminService.isLogged());
-    }
-
-    @GetMapping("/getAdmin")
-    public ResponseEntity getAdmin() {
-        return ResponseEntity.ok(adminService.getAdmin());
-    }
-    //endregion
-
     //region -- OnlinePurchase --
 
     @Autowired
@@ -195,34 +44,6 @@ public class AdminController {
     }
     //endregion
 
-    //region -- Training --
-
-    @Autowired
-    private OnlineTrainingCheckinService onlineTrainingCheckinService;
-
-    @PostMapping("onlineTraining/saveOnlineTraining")
-    public ResponseEntity saveOnlineTraining(@RequestBody OnlineTrainingCheckin onlineTrainingCheckin) {
-        return ResponseEntity.ok(onlineTrainingCheckinService.save(onlineTrainingCheckin));
-    }
-
-    @GetMapping("/onlineTraining/getAllOnlineTraining")
-    public ResponseEntity<List<OnlineTrainingCheckin>> getAllTrraining() {
-        return ResponseEntity.ok(onlineTrainingCheckinService.getAll());
-    }
-
-    @DeleteMapping("/onlineTraining/deleteOnlineTraining/{idOnlineTraining}")
-    public ResponseEntity deleteOnlineTraining(@PathVariable Long idOnlineTraining) {
-        return ResponseEntity.ok(onlineTrainingCheckinService.deleteTrainingCheckin(idOnlineTraining));
-    }
-
-    @PostMapping("client/search")
-    public ResponseEntity<List<OnlineTrainingCheckin>> searchClient(@RequestBody Date date) {
-        System.out.println(date.toString());
-        return ResponseEntity.ok(onlineTrainingCheckinService.findClienByDate(date));
-    }
-
-    //endregion
-
     //region --SendMail--
     @Autowired
     private AdminService sendMailAdminService;
@@ -232,11 +53,6 @@ public class AdminController {
         return ResponseEntity.ok(sendMailAdminService.sendMail(mailDTO));
     }
     //endregion
-
-    @GetMapping("/getProductById/{id}")
-    public ResponseEntity getProductById(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.findProductById(id));
-    }
 
     @Autowired
     private ImageService imageService;

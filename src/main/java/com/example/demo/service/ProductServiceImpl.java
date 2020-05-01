@@ -1,45 +1,34 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Product;
-import com.example.demo.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService
-{
-    @Autowired
-    private ProductRepository productRepository;
-
+public class ProductServiceImpl implements ProductService {
     @Override
     public String save(Product product) {
-        productRepository.save(product);
-        return "Uspesno sacuvan seminar";
+        return null;
     }
 
     @Override
     public String delete(Long id) {
-        productRepository.deleteById(id);
-        return "Uspesno izbrisan seminar";
+        return null;
     }
 
     @Override
     public Product findProductById(Long id) {
-
-        return productRepository.findById(id).get();
+        return null;
     }
 
     @Override
     public String update(Product product) {
-        productRepository.save(product);
-        return "Uspesno izmenjen";
+        return null;
     }
 
     @Override
     public List<Product> getALL() {
-
-        return productRepository.findAll();
+        return null;
     }
 }

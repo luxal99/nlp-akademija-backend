@@ -17,54 +17,6 @@ public class AdminServiceImpl implements AdminService {
     private AdminRepository adminRepository;
 
     @Override
-    public boolean isValidDate(Admin admin) {
-
-        return false;
-    }
-
-    @Override
-    public String changePassword(String password) {
-        return null;
-    }
-
-    @Override
-    public Boolean isLogged() {
-        long id = 1;
-        Admin admin = adminRepository.findById(id).get();
-        if (admin.getIsLogged()){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Admin getAdmin() {
-        long id = 1;
-        Admin admin = adminRepository.findById(id).get();
-        return admin;
-    }
-
-    @Override
-    public Admin putFlag(Admin admin) {
-        adminRepository.save(admin);
-        return admin;
-    }
-
-    @Override
-    public boolean isValid(String username, String password) {
-        List<Admin> loginList = adminRepository.findAll();
-        boolean isValid = false;
-        for (Admin login : loginList) {
-            if (login.getUsername().equals(username) && login.getPassword().equals(password)) {
-                isValid = true;
-            } else {
-                isValid = false;
-            }
-        }
-        return isValid;
-    }
-
-    @Override
     public String sendMail(MailDTO mailDTO) throws MessagingException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(4);
 

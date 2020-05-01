@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.ClientCustomDao;
 import com.example.demo.dao.GenericDao;
 import com.example.demo.entity.BaseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 public class GenericController<T extends BaseEntity> {
 
     @Autowired
-    private GenericDao<T> repository;
+    protected GenericDao<T> repository;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<T> getAll() {
