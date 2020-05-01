@@ -24,24 +24,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *
  * @author luxal
  */
 @Entity
 @Table(name = "image_table")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "ImageTable.findAll", query = "SELECT i FROM ImageTable i"),
-        @NamedQuery(name = "ImageTable.findByIdImage", query = "SELECT i FROM ImageTable i WHERE i.idImage = :idImage"),
-        @NamedQuery(name = "ImageTable.findByName", query = "SELECT i FROM ImageTable i WHERE i.name = :name"),
-        @NamedQuery(name = "ImageTable.findByType", query = "SELECT i FROM ImageTable i WHERE i.type = :type")})
-public class ImageTable implements Serializable {
+    @NamedQuery(name = "ImageTable.findAll", query = "SELECT i FROM ImageTable i"),
+    @NamedQuery(name = "ImageTable.findById", query = "SELECT i FROM ImageTable i WHERE i.id = :id"),
+    @NamedQuery(name = "ImageTable.findByName", query = "SELECT i FROM ImageTable i WHERE i.name = :name"),
+    @NamedQuery(name = "ImageTable.findByType", query = "SELECT i FROM ImageTable i WHERE i.type = :type")})
+public class ImageTable extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_image")
-    private Integer idImage;
+
     @Column(name = "name")
     private String name;
     @Column(name = "type")
@@ -49,8 +46,8 @@ public class ImageTable implements Serializable {
     @Lob
     @Column(name = "pic_byte")
     private byte[] picByte;
-    @JsonIgnore
     @OneToMany(mappedBy = "idImage")
+    @JsonIgnore
     private List<Product> productList;
 
     public ImageTable() {
@@ -66,17 +63,6 @@ public class ImageTable implements Serializable {
 
     }
 
-    public ImageTable(Integer idImage) {
-        this.idImage = idImage;
-    }
-
-    public Integer getIdImage() {
-        return idImage;
-    }
-
-    public void setIdImage(Integer idImage) {
-        this.idImage = idImage;
-    }
 
     public String getName() {
         return name;
@@ -109,31 +95,6 @@ public class ImageTable implements Serializable {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idImage != null ? idImage.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ImageTable)) {
-            return false;
-        }
-        ImageTable other = (ImageTable) object;
-        if ((this.idImage == null && other.idImage != null) || (this.idImage != null && !this.idImage.equals(other.idImage))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "javaapplication1.ImageTable[ idImage=" + idImage + " ]";
     }
 
 }

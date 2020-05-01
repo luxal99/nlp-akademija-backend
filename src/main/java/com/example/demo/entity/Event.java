@@ -25,20 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "event")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
-    @NamedQuery(name = "Event.findByIdEvent", query = "SELECT e FROM Event e WHERE e.idEvent = :idEvent"),
-    @NamedQuery(name = "Event.findByDate", query = "SELECT e FROM Event e WHERE e.date = :date"),
-    @NamedQuery(name = "Event.findByTime", query = "SELECT e FROM Event e WHERE e.time = :time"),
-    @NamedQuery(name = "Event.findByTitle", query = "SELECT e FROM Event e WHERE e.title = :title"),
-    @NamedQuery(name = "Event.findByText", query = "SELECT e FROM Event e WHERE e.text = :text")})
-public class Event implements Serializable {
+    @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")})
+public class Event extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID_EVENT")
-    private Integer idEvent;
+
     @Basic(optional = false)
     @Column(name = "DATE")
     private String date;
@@ -52,21 +43,9 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    public Event(Integer idEvent) {
-        this.idEvent = idEvent;
-    }
 
-    public Event(Integer idEvent, String date) {
-        this.idEvent = idEvent;
+    public Event( String date) {
         this.date = date;
-    }
-
-    public Integer getIdEvent() {
-        return idEvent;
-    }
-
-    public void setIdEvent(Integer idEvent) {
-        this.idEvent = idEvent;
     }
 
     public String getDate() {
@@ -101,29 +80,4 @@ public class Event implements Serializable {
         this.text = text;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idEvent != null ? idEvent.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Event)) {
-            return false;
-        }
-        Event other = (Event) object;
-        if ((this.idEvent == null && other.idEvent != null) || (this.idEvent != null && !this.idEvent.equals(other.idEvent))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "javaapplication1.Event[ idEvent=" + idEvent + " ]";
-    }
-    
 }

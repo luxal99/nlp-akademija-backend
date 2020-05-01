@@ -5,12 +5,10 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.docx4j.openpackaging.Base;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,32 +18,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "product")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByIdProduct", query = "SELECT p FROM Product p WHERE p.idProduct = :idProduct"),
-    @NamedQuery(name = "Product.findByTitle", query = "SELECT p FROM Product p WHERE p.title = :title"),
-    @NamedQuery(name = "Product.findByText", query = "SELECT p FROM Product p WHERE p.text = :text"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
-public class Product implements Serializable {
+public class Product extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_product")
-    private Long idProduct;
+
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
@@ -54,44 +38,20 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "price")
     private long price;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduct")
-    private List<OnlinePurchase> onlinePurchaseList;
-    @JoinColumn(name = "id_image", referencedColumnName = "id_image")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price_eu")
+    private Double priceEu;
+    @JoinColumn(name = "id_image", referencedColumnName = "id")
     @ManyToOne
     private ImageTable idImage;
-    @Basic(optional = false)
-    @Column(name = "price_eu")
-    private long priceEu;
 
     public Product() {
     }
 
 
-    public Product(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public Product(Long idProduct, String title, long price) {
-        this.idProduct = idProduct;
+    public Product(String title, long price) {
         this.title = title;
         this.price = price;
-    }
-
-    public long getPriceEu() {
-        return priceEu;
-    }
-
-    public void setPriceEu(long priceEu) {
-        this.priceEu = priceEu;
-    }
-
-    public Long getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
     }
 
     public String getTitle() {
@@ -118,13 +78,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    @XmlTransient
-    public List<OnlinePurchase> getOnlinePurchaseList() {
-        return onlinePurchaseList;
+    public Double getPriceEu() {
+        return priceEu;
     }
 
-    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
-        this.onlinePurchaseList = onlinePurchaseList;
+    public void setPriceEu(Double priceEu) {
+        this.priceEu = priceEu;
     }
 
     public ImageTable getIdImage() {
@@ -135,29 +94,4 @@ public class Product implements Serializable {
         this.idImage = idImage;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idProduct != null ? idProduct.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product)) {
-            return false;
-        }
-        Product other = (Product) object;
-        if ((this.idProduct == null && other.idProduct != null) || (this.idProduct != null && !this.idProduct.equals(other.idProduct))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "javaapplication1.Product[ idProduct=" + idProduct + " ]";
-    }
-    
 }

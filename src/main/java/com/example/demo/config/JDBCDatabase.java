@@ -24,8 +24,8 @@ public class JDBCDatabase {
             openConection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into nlp_akademija.online_purchase(id_client, id_product, comment, social_link, country) values (?,?,?,?,?)");
             for (int i = 0; i < onlinePurchaseList.size(); i++) {
-                preparedStatement.setLong(1, onlinePurchaseList.get(i).getIdClient().getIdClient());
-                preparedStatement.setLong(2, onlinePurchaseList.get(i).getIdProduct().getIdProduct());
+                preparedStatement.setLong(1, onlinePurchaseList.get(i).getIdClient().getId());
+                preparedStatement.setLong(2, onlinePurchaseList.get(i).getIdProduct().getId());
                 preparedStatement.setString(3, onlinePurchaseList.get(i).getComment());
                 preparedStatement.setString(4, onlinePurchaseList.get(i).getCountry());
                 preparedStatement.setString(5, onlinePurchaseList.get(i).getSocialLink());
