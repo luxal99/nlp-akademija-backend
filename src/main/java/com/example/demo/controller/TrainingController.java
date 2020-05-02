@@ -14,15 +14,10 @@ import java.util.List;
 public class TrainingController extends GenericController<OnlineTrainingCheckin> {
 
     @Autowired
-    protected TrainingDao trainingCustomDao;
+    protected TrainingDao trainingDao;
 
     @PostMapping("/getByDate")
     public List<OnlineTrainingCheckin> searchClient(@RequestBody Date date) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return trainingCustomDao.findAllByIdClientDate(simpleDateFormat.format(date));
-        } catch (Exception e) {
-            return null;
-        }
+        return trainingDao.findAllByIdClientDate(new SimpleDateFormat("dd/MM/yyyy").format(date));
     }
 }
