@@ -26,23 +26,6 @@ import java.util.zip.Inflater;
 @RequestMapping("/admin")
 public class AdminController {
 
-    //region -- OnlinePurchase --
-
-    @Autowired
-    private OnlinePurchaseService onlinePurchaseService;
-
-    @PostMapping("/onlinePurchase/savePurchase/{listOfSelectedProduct}")
-    public ResponseEntity savePurchase(@PathVariable Long[] listOfSelectedProduct, @RequestBody OnlinePurchase onlinePurchase) throws InterruptedException {
-
-        return ResponseEntity.ok(onlinePurchaseService.save(onlinePurchase, listOfSelectedProduct));
-
-    }
-
-    @GetMapping("onlinePurchase/getAll")
-    public ResponseEntity getAllPurchase() {
-        return ResponseEntity.ok(onlinePurchaseService.getAll());
-    }
-    //endregion
 
     //region --SendMail--
     @Autowired
