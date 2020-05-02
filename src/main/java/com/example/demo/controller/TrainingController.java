@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.TrainingCustomDao;
+import com.example.demo.dao.TrainingDao;
 import com.example.demo.entity.OnlineTrainingCheckin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +14,15 @@ import java.util.List;
 public class TrainingController extends GenericController<OnlineTrainingCheckin> {
 
     @Autowired
-    protected TrainingCustomDao trainingCustomDao;
+    protected TrainingDao trainingCustomDao;
 
     @PostMapping("/getByDate")
-    public ResponseEntity<List<OnlineTrainingCheckin>> searchClient(@RequestBody Date date) {
-        return ResponseEntity.ok(trainingCustomDao.findClientByDate(date));
+    public List<OnlineTrainingCheckin> searchClient(@RequestBody Date date) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return trainingCustomDao.findAllByIdClientDate(simpleDateFormat.format(date));
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class MailServiceImpl extends Thread implements MailService {
+
     private MailDTO mailDTO;
     private Integer from;
     private Integer to;
@@ -65,7 +66,7 @@ public class MailServiceImpl extends Thread implements MailService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("nlpmasterakademija@gmail.com", "Preparantus");
+                return new PasswordAuthentication("jankovicm897@gmail.com", "Lukic.aleksa99");
             }
         });
         int validMail = 0;
@@ -96,7 +97,7 @@ public class MailServiceImpl extends Thread implements MailService {
 
         return null;
     }
-    public static boolean isValidEmailAddress(String email) throws AddressException {
+    protected static boolean isValidEmailAddress(String email) throws AddressException {
         boolean isValid = false;
 
         InternetAddress internetAddress = new InternetAddress(email);

@@ -1,23 +1,29 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.MailDTO;
-import com.example.demo.entity.Admin;
-import com.example.demo.repository.AdminRepository;
+import com.example.demo.entity.ImageTable;
+import com.example.demo.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.*;
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Optional;
 import java.util.concurrent.*;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements AdminService, ImageService {
 
-    @Autowired
-    private AdminRepository adminRepository;
 
     @Override
     public String sendMail(MailDTO mailDTO) throws MessagingException, InterruptedException {
+
         ExecutorService executor = Executors.newFixedThreadPool(4);
 
         int partNum = mailDTO.getMailList().size() / 10;
@@ -32,8 +38,6 @@ public class AdminServiceImpl implements AdminService {
         MailServiceImpl mailService8;
         MailServiceImpl mailService9;
         MailServiceImpl mailService10;
-
-
 
 
         Thread[] arrThred = {
@@ -54,15 +58,14 @@ public class AdminServiceImpl implements AdminService {
         };
 
         for (int i = 0; i < arrThred.length; i++) {
-            System.out.println("Threard: "+i);
+            System.out.println("Threard: " + i);
             if (i == 5) {
                 arrThred[i].start();
                 Thread.sleep(45000);
-            }else if(i==9){
+            } else if (i == 9) {
                 arrThred[i].start();
                 Thread.sleep(30000);
-            }
-            else {
+            } else {
                 arrThred[i].start();
             }
         }
@@ -70,6 +73,105 @@ public class AdminServiceImpl implements AdminService {
         return "Email sent!";
     }
 
+    @Autowired
+    private ImageRepository imageRepository;
+
+    @Override
+    public ResponseEntity.BodyBuilder uploadImage(MultipartFile file) {
+        ImageTable img = null;
+        try {
+            img = new ImageTable(file.getOriginalFilename(), file.getContentType(),
+
+                    compressBytes(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        imageRepository.save(img);
+
+        return ResponseEntity.status(200);
+    }
+
+    @Override
+    public ImageTable getImage(String imageName) {
+
+
+        final Optional<ImageTable> retrievedImage = imageRepository.findByName(imageName);
+        ImageTable img = new ImageTable(retrievedImage.get().getName(), retrievedImage.get().getType(),
+
+                decompressBytes(retrievedImage.get().getPicByte()));
+
+        return img;
+
+
+    }
+
+    public static byte[] decompressBytes(byte[] data) {
+
+        Inflater inflater = new Inflater();
+
+        inflater.setInput(data);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+
+        byte[] buffer = new byte[1024];
+
+        try {
+
+            while (!inflater.finished()) {
+
+                int count = inflater.inflate(buffer);
+
+                outputStream.write(buffer, 0, count);
+
+            }
+
+            outputStream.close();
+
+        } catch (IOException ioe) {
+
+        } catch (DataFormatException e) {
+
+        }
+
+        return outputStream.toByteArray();
+
+    }
+
+
+    public static byte[] compressBytes(byte[] data) {
+
+        Deflater deflater = new Deflater();
+
+        deflater.setInput(data);
+
+        deflater.finish();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+
+        byte[] buffer = new byte[1024];
+
+        while (!deflater.finished()) {
+
+            int count = deflater.deflate(buffer);
+
+            outputStream.write(buffer, 0, count);
+
+        }
+
+        try {
+
+            outputStream.close();
+
+        } catch (IOException e) {
+
+        }
+
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+
+        return outputStream.toByteArray();
+
+    }
 
 }
 

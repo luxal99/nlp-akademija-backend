@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.ClientCustomDao;
 import com.example.demo.dao.ClientDao;
-import com.example.demo.dto.ClientDTO;
 import com.example.demo.entity.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/client")
@@ -18,9 +16,12 @@ public class ClientController extends GenericController<Client> {
     @Autowired
     private ClientCustomDao customDao;
 
-    @GetMapping("custom")
-    protected ResponseEntity<Set<ClientDTO>> get() {
-        return ResponseEntity.ok(customDao.clientSet());
+    @Autowired
+    private ClientDao clientDao;
+
+    @GetMapping("all")
+    public List<Client> clientSet() {
+        return clientDao.findDistinctByMail();
     }
 
     @PostMapping("save")

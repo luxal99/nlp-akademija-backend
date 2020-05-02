@@ -5,6 +5,6 @@ import com.example.demo.entity.Admin;
 
 import javax.mail.MessagingException;
 
-public interface AdminService {
+public interface AdminService{
     public String sendMail(MailDTO mailDTO) throws MessagingException, InterruptedException;
 }

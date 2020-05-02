@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author luxal
  */
 @Entity
+
 @Table(name = "client")
 @XmlRootElement
 @NamedQueries({
@@ -61,8 +62,9 @@ public class Client extends BaseEntity implements Serializable {
     public Client() {
     }
 
-    public Client(Integer id, String name, String lastname, String mail) {
 
+
+    public Client( String name, String lastname, String mail) {
         this.name = name;
         this.lastname = lastname;
         this.mail = mail;

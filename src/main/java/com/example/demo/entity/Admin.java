@@ -35,9 +35,6 @@ public class Admin extends BaseEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @Column(name = "is_logged")
-    private boolean isLogged;
 
     public Admin() {
     }
@@ -46,7 +43,6 @@ public class Admin extends BaseEntity implements Serializable {
 
         this.username = username;
         this.password = password;
-        this.isLogged = isLogged;
     }
 
 
@@ -64,14 +60,6 @@ public class Admin extends BaseEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean getIsLogged() {
-        return isLogged;
-    }
-
-    public void setIsLogged(boolean isLogged) {
-        this.isLogged = isLogged;
     }
 
 }
