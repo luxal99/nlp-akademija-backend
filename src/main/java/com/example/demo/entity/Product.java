@@ -5,9 +5,10 @@
  */
 package com.example.demo.entity;
 
-import org.docx4j.openpackaging.Base;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,14 +19,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *
  * @author luxal
  */
 @Entity
 @Table(name = "product")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
 public class Product extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,15 +51,13 @@ public class Product extends BaseEntity implements Serializable {
     @JoinColumn(name = "id_image", referencedColumnName = "id")
     @ManyToOne
     private ImageTable idImage;
+    @OneToMany(mappedBy = "idProduct")
+    @JsonIgnore
+    private List<TestimonialImage> testimonialImageList;
 
     public Product() {
     }
 
-
-    public Product(String title, long price) {
-        this.title = title;
-        this.price = price;
-    }
 
     public String getTitle() {
         return title;
@@ -94,4 +99,12 @@ public class Product extends BaseEntity implements Serializable {
         this.idImage = idImage;
     }
 
+    @XmlTransient
+    public List<TestimonialImage> getTestimonialImageList() {
+        return testimonialImageList;
+    }
+
+    public void setTestimonialImageList(List<TestimonialImage> testimonialImageList) {
+        this.testimonialImageList = testimonialImageList;
+    }
 }

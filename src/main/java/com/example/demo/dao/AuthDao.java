@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public interface AuthDao extends GenericDao<Admin> {
+
     @Query("select a from Admin a where a.username = :username")
     Admin findByUsername(@Param("username") String username);
 

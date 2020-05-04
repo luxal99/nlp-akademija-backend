@@ -31,10 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "image_table")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ImageTable.findAll", query = "SELECT i FROM ImageTable i"),
-    @NamedQuery(name = "ImageTable.findById", query = "SELECT i FROM ImageTable i WHERE i.id = :id"),
-    @NamedQuery(name = "ImageTable.findByName", query = "SELECT i FROM ImageTable i WHERE i.name = :name"),
-    @NamedQuery(name = "ImageTable.findByType", query = "SELECT i FROM ImageTable i WHERE i.type = :type")})
+    @NamedQuery(name = "ImageTable.findAll", query = "SELECT i FROM ImageTable i")})
 public class ImageTable extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,7 +59,6 @@ public class ImageTable extends BaseEntity implements Serializable {
         this.picByte = picByte;
 
     }
-
 
     public String getName() {
         return name;
