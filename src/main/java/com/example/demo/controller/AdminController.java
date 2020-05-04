@@ -21,7 +21,6 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-@CrossOrigin(value = "https://157.230.25.201:8443")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
