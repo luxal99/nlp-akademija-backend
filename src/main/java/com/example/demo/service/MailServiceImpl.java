@@ -49,28 +49,31 @@ public class MailServiceImpl extends Thread implements MailService {
     @Override
     public void run() {
         try {
-            sendMail(this.mailDTO,this.from,this.to);
+            sendMail(this.mailDTO, this.from, this.to);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public String sendMail(MailDTO mailDTO,int from,int to) throws MessagingException {
+    public String sendMail(MailDTO mailDTO, int from, int to) throws MessagingException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "smtp-relay.sendinblue.com");
         props.put("mail.smtp.sendpartial", "true");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", "587" +
+                "");
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("jankovicm897@gmail.com", "Lukic.aleksa99");
+                return new PasswordAuthentication("nlpmasterakademija@gmail.com", "Preparantus");
             }
         });
         int validMail = 0;
+        Transport transport = session.getTransport("smtp");
         for (int i = from; i < to; i++) {
+
             if (isValidEmailAddress(mailDTO.getMailList().get(i))) {
                 validMail++;
                 Message msg = new MimeMessage(session);
@@ -86,7 +89,6 @@ public class MailServiceImpl extends Thread implements MailService {
 
                     Transport.send(msg);
 
-
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +99,7 @@ public class MailServiceImpl extends Thread implements MailService {
 
         return null;
     }
+
     protected static boolean isValidEmailAddress(String email) throws AddressException {
         boolean isValid = false;
 
