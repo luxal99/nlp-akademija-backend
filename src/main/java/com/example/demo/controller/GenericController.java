@@ -48,4 +48,5 @@ public class GenericController<T extends BaseEntity> {
             return HttpStatus.CONFLICT.toString();
         }
     }
+
 }
