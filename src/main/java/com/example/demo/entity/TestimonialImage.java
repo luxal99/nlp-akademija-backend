@@ -20,14 +20,13 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "testimonial_image")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TestimonialImage.findAll", query = "SELECT t FROM TestimonialImage t")})
+        @NamedQuery(name = "TestimonialImage.findAll", query = "SELECT t FROM TestimonialImage t")})
 public class TestimonialImage extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,9 +36,12 @@ public class TestimonialImage extends BaseEntity implements Serializable {
     @JoinColumn(name = "id_product", referencedColumnName = "id")
     @ManyToOne
     private Product idProduct;
+    @Column(name = "name")
+    private String name;
 
     public TestimonialImage() {
     }
+
     public void setUrl(String url) {
         this.url = url;
     }
@@ -52,5 +54,15 @@ public class TestimonialImage extends BaseEntity implements Serializable {
         this.idProduct = idProduct;
     }
 
+    public String getUrl() {
+        return url;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
