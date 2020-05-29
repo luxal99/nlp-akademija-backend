@@ -80,7 +80,6 @@ public class AdminController {
     }
 
     @GetMapping(path = {"/get/{imageName}"})
-
     public ImageTable getImage(@PathVariable("imageName") String imageName) throws IOException {
         return imageService.getImage(imageName);
     }
