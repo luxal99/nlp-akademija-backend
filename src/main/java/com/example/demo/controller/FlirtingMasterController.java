@@ -3,7 +3,6 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.FlirtingMasterDao;
 import com.example.demo.entity.FlirtingMaster;
-import com.example.demo.entity.OnlineTrainingCheckin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author luxal
  */
 @Entity
+@XmlRootElement
 @Table(name = "flirting_master")
 public class FlirtingMaster extends BaseEntity implements Serializable {
 
