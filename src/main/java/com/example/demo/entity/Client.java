@@ -9,14 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,11 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author luxal
  */
 @Entity
-
 @Table(name = "client")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")})
 public class Client extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,15 +35,9 @@ public class Client extends BaseEntity implements Serializable {
     private String telephoneNum;
     @Column(name = "date")
     private String date;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idClient")
     @JsonIgnore
-    private List<CourseCheckin> courseCheckinList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    @JsonIgnore
-    private List<OnlinePurchase> onlinePurchaseList;
-    @OneToMany(mappedBy = "idClient")
-    @JsonIgnore
-    private List<OnlineCheckIn> onlineCheckInList;
+    private List<FlirtingMaster> flirtingMasterList;
     @OneToMany(mappedBy = "idClient")
     @JsonIgnore
     private List<OnlineTrainingCheckin> onlineTrainingCheckinList;
@@ -63,8 +46,16 @@ public class Client extends BaseEntity implements Serializable {
     }
 
 
+    public List<OnlineTrainingCheckin> getOnlineTrainingCheckinList() {
+        return onlineTrainingCheckinList;
+    }
 
-    public Client( String name, String lastname, String mail) {
+    public void setOnlineTrainingCheckinList(List<OnlineTrainingCheckin> onlineTrainingCheckinList) {
+        this.onlineTrainingCheckinList = onlineTrainingCheckinList;
+    }
+
+    public Client(String name, String lastname, String mail) {
+
         this.name = name;
         this.lastname = lastname;
         this.mail = mail;
@@ -112,39 +103,13 @@ public class Client extends BaseEntity implements Serializable {
     }
 
     @XmlTransient
-    public List<CourseCheckin> getCourseCheckinList() {
-        return courseCheckinList;
+    public List<FlirtingMaster> getFlirtingMasterList() {
+        return flirtingMasterList;
     }
 
-    public void setCourseCheckinList(List<CourseCheckin> courseCheckinList) {
-        this.courseCheckinList = courseCheckinList;
+    public void setFlirtingMasterList(List<FlirtingMaster> flirtingMasterList) {
+        this.flirtingMasterList = flirtingMasterList;
     }
 
-    @XmlTransient
-    public List<OnlinePurchase> getOnlinePurchaseList() {
-        return onlinePurchaseList;
-    }
-
-    public void setOnlinePurchaseList(List<OnlinePurchase> onlinePurchaseList) {
-        this.onlinePurchaseList = onlinePurchaseList;
-    }
-
-    @XmlTransient
-    public List<OnlineCheckIn> getOnlineCheckInList() {
-        return onlineCheckInList;
-    }
-
-    public void setOnlineCheckInList(List<OnlineCheckIn> onlineCheckInList) {
-        this.onlineCheckInList = onlineCheckInList;
-    }
-
-    @XmlTransient
-    public List<OnlineTrainingCheckin> getOnlineTrainingCheckinList() {
-        return onlineTrainingCheckinList;
-    }
-
-    public void setOnlineTrainingCheckinList(List<OnlineTrainingCheckin> onlineTrainingCheckinList) {
-        this.onlineTrainingCheckinList = onlineTrainingCheckinList;
-    }
 
 }
