@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("flirting")
+@RequestMapping("/flirting")
 public class FlirtingMasterController extends GenericController<FlirtingMaster> {
 
     @Autowired
