@@ -5,11 +5,18 @@
  */
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -17,7 +24,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author luxal
  */
 @Entity
-@Table(name = "client")
+@Table(name = "client", catalog = "nlp_akademija", schema = "")
+@XmlRootElement
 public class Client extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,27 +43,14 @@ public class Client extends BaseEntity implements Serializable {
     private String telephoneNum;
     @Column(name = "date")
     private String date;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idClient")
-    @JsonIgnore
-    private List<FlirtingMaster> flirtingMasterList;
     @OneToMany(mappedBy = "idClient")
-    @JsonIgnore
-    private List<OnlineTrainingCheckin> onlineTrainingCheckinList;
+    private List<FlirtingMaster> flirtingMasterList;
 
     public Client() {
     }
 
 
-    public List<OnlineTrainingCheckin> getOnlineTrainingCheckinList() {
-        return onlineTrainingCheckinList;
-    }
-
-    public void setOnlineTrainingCheckinList(List<OnlineTrainingCheckin> onlineTrainingCheckinList) {
-        this.onlineTrainingCheckinList = onlineTrainingCheckinList;
-    }
-
-    public Client(String name, String lastname, String mail) {
-
+    public Client( String name, String lastname, String mail) {
         this.name = name;
         this.lastname = lastname;
         this.mail = mail;
@@ -110,6 +105,4 @@ public class Client extends BaseEntity implements Serializable {
     public void setFlirtingMasterList(List<FlirtingMaster> flirtingMasterList) {
         this.flirtingMasterList = flirtingMasterList;
     }
-
-
 }
