@@ -5,6 +5,8 @@
  */
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,6 +46,7 @@ public class Client extends BaseEntity implements Serializable {
     @Column(name = "date")
     private String date;
     @OneToMany(mappedBy = "idClient")
+    @JsonIgnore
     private List<FlirtingMaster> flirtingMasterList;
 
     public Client() {
